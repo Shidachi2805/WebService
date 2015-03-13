@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/06/2015 21:08:37
--- Generated from EDMX file: H:\Master_2014\Cloud Computing\Projekt\WS_DB_Projekt_EATGATE\WWWBewertungPortal\WWWBewertungPortal\Models\Datenbank\WWWBewertungsModell.edmx
+-- Date Created: 01/23/2015 14:47:28
+-- Generated from EDMX file: C:\Users\Shi\cloudcomputing\WebServiceEatGate\WWWBewertungPortal\Models\Datenbank\WWWBewertungsModell.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [DB_BewertungPotal];
+USE [Bewertungsportal];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,20 +17,20 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_Tab_LokationTab_Bewertung]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tab_BewertungSet] DROP CONSTRAINT [FK_Tab_LokationTab_Bewertung];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Tab_BenutzerTab_Bewertung]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tab_BewertungSet] DROP CONSTRAINT [FK_Tab_BenutzerTab_Bewertung];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Tab_BewertungTab_Lokation_Photo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tab_Lokation_PhotoSet] DROP CONSTRAINT [FK_Tab_BewertungTab_Lokation_Photo];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Tab_BenutzerTab_Kommentar]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tab_KommentarSet] DROP CONSTRAINT [FK_Tab_BenutzerTab_Kommentar];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Tab_BewertungTab_Kommentar]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tab_KommentarSet] DROP CONSTRAINT [FK_Tab_BewertungTab_Kommentar];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Tab_BewertungTab_Lokation_Photo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Tab_Lokation_PhotoSet] DROP CONSTRAINT [FK_Tab_BewertungTab_Lokation_Photo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Tab_LokationTab_Bewertung]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Tab_BewertungSet] DROP CONSTRAINT [FK_Tab_LokationTab_Bewertung];
 GO
 
 -- --------------------------------------------------
@@ -40,17 +40,17 @@ GO
 IF OBJECT_ID(N'[dbo].[Tab_BenutzerSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tab_BenutzerSet];
 GO
-IF OBJECT_ID(N'[dbo].[Tab_BewertungSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Tab_BewertungSet];
-GO
-IF OBJECT_ID(N'[dbo].[Tab_KommentarSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Tab_KommentarSet];
+IF OBJECT_ID(N'[dbo].[Tab_LokationSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tab_LokationSet];
 GO
 IF OBJECT_ID(N'[dbo].[Tab_Lokation_PhotoSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tab_Lokation_PhotoSet];
 GO
-IF OBJECT_ID(N'[dbo].[Tab_LokationSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Tab_LokationSet];
+IF OBJECT_ID(N'[dbo].[Tab_KommentarSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tab_KommentarSet];
+GO
+IF OBJECT_ID(N'[dbo].[Tab_BewertungSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tab_BewertungSet];
 GO
 
 -- --------------------------------------------------
@@ -151,7 +151,6 @@ ADD CONSTRAINT [FK_Tab_LokationTab_Bewertung]
     REFERENCES [dbo].[Tab_LokationSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Tab_LokationTab_Bewertung'
 CREATE INDEX [IX_FK_Tab_LokationTab_Bewertung]
@@ -166,7 +165,6 @@ ADD CONSTRAINT [FK_Tab_BenutzerTab_Bewertung]
     REFERENCES [dbo].[Tab_BenutzerSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Tab_BenutzerTab_Bewertung'
 CREATE INDEX [IX_FK_Tab_BenutzerTab_Bewertung]
@@ -181,7 +179,6 @@ ADD CONSTRAINT [FK_Tab_BewertungTab_Lokation_Photo]
     REFERENCES [dbo].[Tab_BewertungSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Tab_BewertungTab_Lokation_Photo'
 CREATE INDEX [IX_FK_Tab_BewertungTab_Lokation_Photo]
@@ -196,7 +193,6 @@ ADD CONSTRAINT [FK_Tab_BenutzerTab_Kommentar]
     REFERENCES [dbo].[Tab_BenutzerSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Tab_BenutzerTab_Kommentar'
 CREATE INDEX [IX_FK_Tab_BenutzerTab_Kommentar]
@@ -211,7 +207,6 @@ ADD CONSTRAINT [FK_Tab_BewertungTab_Kommentar]
     REFERENCES [dbo].[Tab_BewertungSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Tab_BewertungTab_Kommentar'
 CREATE INDEX [IX_FK_Tab_BewertungTab_Kommentar]
